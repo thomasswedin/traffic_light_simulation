@@ -1,6 +1,6 @@
 import { inject, injectable } from "inversify";
 import { TYPES } from "../../Types";
-import { IEventDispatcher } from "../../common/event/EventDispatcher";
+import type { IEventDispatcher } from "../../common/event/IEventDispatcher";
 
 @injectable()
 export class TimerModel {

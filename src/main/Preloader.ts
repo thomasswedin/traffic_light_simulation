@@ -1,6 +1,6 @@
 import { LanguageManager } from '../common/utils/LanguageManager';
 import { Container, Graphics, Assets } from "pixi.js";
-import { manifest } from "../assets/src/assets";
+import { manifest } from "../assets/src/assets.ts";
 import { Manager } from "./Manager";
 import { IScene } from "../common/IScene";
 import { Game } from "./Game";

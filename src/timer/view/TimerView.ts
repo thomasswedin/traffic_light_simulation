@@ -1,7 +1,7 @@
 import { inject, injectable } from "inversify";
 import {Color, Container, Graphics} from 'pixi.js';
 import { TYPES } from "../../Types";
-import { IEventDispatcher } from "../../common/event/EventDispatcher";
+import type { IEventDispatcher } from "../../common/event/IEventDispatcher";
 import { GameConstants } from "../../constants/GameConstants";
 
 @injectable()

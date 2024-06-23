@@ -1,5 +1,5 @@
 import { inject, injectable, Container as System } from "inversify";
-import { IEventDispatcher } from "../../common/event/EventDispatcher";
+import type { IEventDispatcher } from "../../common/event/IEventDispatcher.ts";
 import { TYPES } from "../../Types";
 import { TimerView } from "../view/TimerView";
 import { TimerModel } from "../model/TimerModel";
@@ -19,7 +19,7 @@ export class TimerController {
     protected _model:TimerModel;
     protected _gameOver:boolean = false;
     
-    private timerInterval: NodeJS.Timeout;
+    private timerInterval: number;
     private startTime: number;
 
     public setup(system:System): void {

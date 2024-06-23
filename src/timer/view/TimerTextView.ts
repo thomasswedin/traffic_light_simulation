@@ -1,7 +1,7 @@
 import { inject, injectable } from "inversify";
 import {Container, Graphics, Text} from 'pixi.js';
 import { TYPES } from "../../Types";
-import { IEventDispatcher } from "../../common/event/EventDispatcher";
+import type { IEventDispatcher } from "../../common/event/IEventDispatcher";
 
 @injectable()
 export class TimerTextView{

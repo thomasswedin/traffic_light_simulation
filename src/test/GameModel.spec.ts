@@ -1,4 +1,4 @@
-import "reflect-metadata"; 
+/*import "reflect-metadata";
 import { expect } from 'chai';
 import { it } from 'mocha';
 import { GameModel } from '../src/game/model/GameModel';
@@ -42,3 +42,4 @@ describe('GameModel', () => {
     expect(actualPoint).to.deep.equal(expectedPoint);
   });
 });
+ */

@@ -1,11 +1,6 @@
 import {IEvent} from "./IEvent";
 import "reflect-metadata";
-
-export interface IEventDispatcher {
-    addEventListener(eventType: string, listener: any, scope?: any): void;
-    removeEventListener(eventType: string, listener: any, scope?: any): void;
-    dispatchEvent(event: IEvent): void;
-}
+import {IEventDispatcher} from "./IEventDispatcher.ts";
 
 export class EventDispatcher implements IEventDispatcher {
     private static instance: EventDispatcher;
