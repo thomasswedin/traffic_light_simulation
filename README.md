@@ -1,1 +1,1 @@
-# traffic_light_simulation
+# traffic_light_simulator
