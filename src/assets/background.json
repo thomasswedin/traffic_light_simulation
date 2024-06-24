@@ -1,0 +1,55 @@
+{"frames": {
+
+"level1.png":
+{
+	"frame": {"x":1,"y":1,"w":40,"h":1024},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":40,"h":1024},
+	"sourceSize": {"w":40,"h":1024}
+},
+"level2.png":
+{
+	"frame": {"x":43,"y":1,"w":40,"h":1024},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":40,"h":1024},
+	"sourceSize": {"w":40,"h":1024}
+},
+"level3.png":
+{
+	"frame": {"x":85,"y":1,"w":40,"h":1024},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":40,"h":1024},
+	"sourceSize": {"w":40,"h":1024}
+},
+"level4.png":
+{
+	"frame": {"x":127,"y":1,"w":40,"h":1024},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":40,"h":1024},
+	"sourceSize": {"w":40,"h":1024}
+},
+"level5.png":
+{
+	"frame": {"x":169,"y":1,"w":40,"h":1024},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":40,"h":1024},
+	"sourceSize": {"w":40,"h":1024}
+}},
+"animations": {
+	"level": ["level1.png","level2.png","level3.png","level4.png","level5.png"]
+},
+"meta": {
+	"app": "https://www.codeandweb.com/texturepacker",
+	"version": "1.1",
+	"image": "background.png",
+	"format": "RGBA8888",
+	"size": {"w":210,"h":1026},
+	"scale": "1",
+	"smartupdate": "$TexturePacker:SmartUpdate:665d33ef1bc5b37a6b5d4e0d0f3ee42d:131beaa81b8c520cf53817a065547836:2ba65c328dea799e4d80739630892abf$"
+}
+}

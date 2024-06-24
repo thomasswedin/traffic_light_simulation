@@ -1,18 +1,21 @@
 import { Container as System } from "inversify";
 import {Assets, Container, Sprite } from 'pixi.js';
 import "reflect-metadata";
+import {TrafficLightController} from "../traffic_light/controller/TrafficLightController.ts";
+import {TrafficLightView} from "../traffic_light/view/TrafficLightView.ts";
 import { TYPES } from "../Types";
 import type {IEventDispatcher } from "../common/event/IEventDispatcher";
 import { EventDispatcher } from "../common/event/EventDispatcher";
 
 import { IScene } from "../common/IScene";
-import { TimerController } from "../timer/controller/TimerController";
 import { Manager } from "./Manager";
 import { Helper } from "../common/utils/Helper";
 //import { GameConstants } from "../constants/GameConstants";
 
 export class Game extends Container implements IScene {
 
+    protected _trafficLightController: TrafficLightController;
+    protected _trafficLightView: TrafficLightView;
 
     constructor() {
         super();
@@ -38,6 +41,10 @@ export class Game extends Container implements IScene {
     protected init() {
         const system = new System();
         system.bind<IEventDispatcher>(TYPES.EventDispatcher).toConstantValue(EventDispatcher.getInstance());
+        this._trafficLightController = system.resolve<TrafficLightController>(TrafficLightController);
+        this._trafficLightController.setup(system);
+        this._trafficLightView = this._trafficLightController.view;
+        this.addChild(this._trafficLightView);
 
         window.addEventListener("orientationchange", this.orientationChange.bind(this));
         this.setupBackground(1);
@@ -66,8 +73,6 @@ export class Game extends Container implements IScene {
 
         const xPos: number = 0;
         const yPos: number = 0;
-    
-
     }
 
     private positionElementsForPortraiteMode(): void {

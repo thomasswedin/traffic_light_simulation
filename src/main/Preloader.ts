@@ -1,4 +1,3 @@
-import { LanguageManager } from '../common/utils/LanguageManager';
 import { Container, Graphics, Assets } from "pixi.js";
 import { manifest } from "../assets/src/assets.ts";
 import { Manager } from "./Manager";
@@ -50,7 +49,6 @@ export class Preloader extends Container implements IScene {
     }
 
     private gameLoaded(): void {
-        LanguageManager.initialize();
         // Change scene to the game scene!
         Manager.changeScene(new Game());
     }

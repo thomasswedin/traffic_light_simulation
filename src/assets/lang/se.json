@@ -1,0 +1,28 @@
+{
+    "TETRIS WORDS": [
+        {
+            "key": "HOLD",
+            "phrase": "UNDANSTOPPAD"
+        },
+        {
+            "key": "NEXT",
+            "phrase": "NÄSTA"
+        },
+        {
+            "key": "PLAY",
+            "phrase": "SPELA"
+        },
+        {
+            "key": "SCORE",
+            "phrase": "POÄNG"
+        },
+        {
+            "key": "LEVEL",
+            "phrase": "NIVÅ"
+        },
+        {
+            "key": "LINES",
+            "phrase": "LINJER"
+        }
+    ]
+}

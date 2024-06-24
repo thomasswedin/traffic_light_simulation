@@ -1,0 +1,52 @@
+{"frames": {
+
+"background.png":
+{
+	"frame": {"x":1,"y":1,"w":329,"h":763},
+	"rotated": true,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":329,"h":763},
+	"sourceSize": {"w":329,"h":763}
+},
+"green.png":
+{
+	"frame": {"x":407,"y":332,"w":201,"h":200},
+	"rotated": true,
+	"trimmed": true,
+	"spriteSourceSize": {"x":64,"y":491,"w":201,"h":200},
+	"sourceSize": {"w":329,"h":763}
+},
+"off.png":
+{
+	"frame": {"x":1,"y":332,"w":201,"h":201},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":64,"y":281,"w":201,"h":201},
+	"sourceSize": {"w":329,"h":763}
+},
+"red.png":
+{
+	"frame": {"x":609,"y":332,"w":201,"h":200},
+	"rotated": true,
+	"trimmed": true,
+	"spriteSourceSize": {"x":64,"y":72,"w":201,"h":200},
+	"sourceSize": {"w":329,"h":763}
+},
+"yellow.png":
+{
+	"frame": {"x":204,"y":332,"w":201,"h":201},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":64,"y":281,"w":201,"h":201},
+	"sourceSize": {"w":329,"h":763}
+}},
+"meta": {
+	"app": "https://www.codeandweb.com/texturepacker",
+	"version": "1.1",
+	"image": "traffic_light.png",
+	"format": "RGBA8888",
+	"size": {"w":810,"h":534},
+	"scale": "1",
+	"smartupdate": "$TexturePacker:SmartUpdate:c42c28c5d480897c87f243b89ecbd987:cdb20ddb4feb73abd79b2e82918b600a:b515fa068bd802fcca8f9e83c7bdacda$"
+}
+}

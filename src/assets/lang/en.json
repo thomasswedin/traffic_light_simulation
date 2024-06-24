@@ -1,0 +1,28 @@
+{
+    "TETRIS WORDS": [
+        {
+            "key": "HOLD",
+            "phrase": "HOLD"
+        },
+        {
+            "key": "NEXT",
+            "phrase": "NEXT"
+        },
+        {
+            "key": "PLAY",
+            "phrase": "PLAY"
+        },
+        {
+            "key": "SCORE",
+            "phrase": "SCORE"
+        },
+        {
+            "key": "LEVEL",
+            "phrase": "LEVEL"
+        },
+        {
+            "key": "LINES",
+            "phrase": "LINES"
+        }
+    ]
+}

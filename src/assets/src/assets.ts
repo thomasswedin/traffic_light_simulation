@@ -15,10 +15,10 @@ export const manifest:ResolverManifest = {
             }
         },
         {
-            name : "buttons",
+            name : "traffic-light",
             assets:
             {
-                "buttonsJSON" : "./src/assets/buttons.json"
+                "traffic-lightJSON" : "./src/assets/traffic_light.json"
             }
         },
         {
