@@ -44,7 +44,7 @@ export class Game extends Container implements IScene {
         this._trafficLightController = system.resolve<TrafficLightController>(TrafficLightController);
         this._trafficLightController.setup(system);
         this._trafficLightView = this._trafficLightController.view;
-        this.addChild(this._trafficLightView);
+        this.addChild(this._trafficLightView.view);
 
         window.addEventListener("orientationchange", this.orientationChange.bind(this));
         this.setupBackground(1);
