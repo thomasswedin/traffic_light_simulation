@@ -1,20 +1,8 @@
-import { GameConstants } from "../../constants/GameConstants";
+import { AppConstants } from "../../constants/AppConstants.ts";
 import {Container, Point } from 'pixi.js';
 
 export class Helper {
-    
-    //Create a function that will find the score based on the number of lines cleared in GameConstants.SCORES.
-    //Function will take in the number of lines cleared and return the score.
-    //A loop is needed to iterate through the array of objects in GameConstants.SCORES
-    public static calculateScore(lineClear: number): number {
-        let score: number = 0;
-        for (let i = 0; i < GameConstants.SCORES.length; i++) {
-            if (GameConstants.SCORES[i].lines === lineClear) {
-                score = GameConstants.SCORES[i].score;
-            }
-        }
-        return score;
-    }
+
 
     public static calculateContentSize(container: Container): Point {
         return new Point(this.calculateContentWidth(container), this.calculateContentHeight(container));
