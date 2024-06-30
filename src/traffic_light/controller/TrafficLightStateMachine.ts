@@ -22,9 +22,17 @@ export class TrafficLightStateMachine {
         return this._previousState;
     }
 
+    public goToRedFromYellowBlinkState(): void {
+        this._previousState = TrafficLightState.Green;
+    }
+
+    public goToGreenFromYellowBlinkState(): void {
+        this._previousState = TrafficLightState.Red;
+    }
+
     //Set up the change method
     public change() {
-        //Define switch case for each state
+        console.log("Changing state from " + this._currentState);
         switch (this._currentState) {
             case TrafficLightState.Idle:
                 this.setState(TrafficLightState.Red);
@@ -33,10 +41,14 @@ export class TrafficLightStateMachine {
                 this.setState(TrafficLightState.Yellow);
                 break;
             case TrafficLightState.Yellow:
-                this.setState(TrafficLightState.Green);
+                if(this._previousState === TrafficLightState.Red) {
+                    this.setState(TrafficLightState.Green);
+                } else if (this._previousState === TrafficLightState.Green) {
+                    this.setState(TrafficLightState.Red);
+                }
                 break;
             case TrafficLightState.Green:
-                this.setState(TrafficLightState.Red);
+                this.setState(TrafficLightState.Yellow);
                 break;
             default:
                 console.log("Invalid state");

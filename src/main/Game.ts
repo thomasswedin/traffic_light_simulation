@@ -44,6 +44,10 @@ export class Game extends Container implements IScene {
         this._trafficLightController = system.resolve<TrafficLightController>(TrafficLightController);
         this._trafficLightController.setup(system);
         this._trafficLightView = this._trafficLightController.view;
+
+        //Change the size of the traffic light view
+        this._trafficLightView.view.scale.set(0.02);
+        this._trafficLightView.view.position.set(0, 10);
         this.addChild(this._trafficLightView.view);
 
         window.addEventListener("orientationchange", this.orientationChange.bind(this));

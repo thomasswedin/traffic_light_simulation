@@ -1,3 +1,4 @@
 export class AppConstants {
-    public static readonly FADE_DURATION: number = .5;
+    public static readonly SWITCH_DURATION: number = 1.5;
+
 }
