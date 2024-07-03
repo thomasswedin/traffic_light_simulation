@@ -11,7 +11,7 @@ export class TrafficLightStateMachine {
     constructor() {
         //Set the initial state to Red
         this._currentState = TrafficLightState.Idle;
-        this._previousState = TrafficLightState.Idle;
+        this._previousState = TrafficLightState.Yellow;
     }
 
     public get state(): TrafficLightState {
@@ -30,16 +30,19 @@ export class TrafficLightStateMachine {
         this._previousState = TrafficLightState.Red;
     }
 
+    public goIdleState(): void {
+        this._previousState = this._currentState;
+        this._currentState = TrafficLightState.Idle;
+    }
+
     //Set up the change method
     public change() {
         console.log("Changing state from " + this._currentState);
         switch (this._currentState) {
-            case TrafficLightState.Idle:
-                this.setState(TrafficLightState.Red);
-                break;
             case TrafficLightState.Red:
                 this.setState(TrafficLightState.Yellow);
                 break;
+            case TrafficLightState.Idle:
             case TrafficLightState.Yellow:
                 if(this._previousState === TrafficLightState.Red) {
                     this.setState(TrafficLightState.Green);

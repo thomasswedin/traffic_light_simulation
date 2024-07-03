@@ -27,6 +27,8 @@ export class TrafficLightView {
     private _yellowLightPos: Point = new Point(165, 382);
     private _greenLightPos: Point = new Point(165, 592);
 
+    private _lightAnimation: gsap.core.Tween;
+
     public setup(): void {
         this._view = new Container();
         this._view.position.set(0, 0);
@@ -45,6 +47,11 @@ export class TrafficLightView {
             case TrafficLightState.Green:
                 this.turnLight(this._greenLightOn, false);
                 break;
+            case TrafficLightState.Idle:
+                //this.killIdleYellowLight();
+                this.turnLight(this._yellowLightOn, false);
+                this.pauseIdleYellowLight();
+                break;
             default:
                 console.log("Invalid state");
                 break;
@@ -59,6 +66,9 @@ export class TrafficLightView {
                 break;
             case TrafficLightState.Green:
                 this.turnLight(this._greenLightOn, true);
+                break;
+            case TrafficLightState.Idle:
+                this.idleYellowLight();
                 break;
             default:
                 console.log("Invalid state");
@@ -106,6 +116,30 @@ export class TrafficLightView {
     protected turnLight(light: Sprite, status: boolean): void {
         gsap.to(light, {duration: AppConstants.SWITCH_DURATION, alpha: status ? 1 : 0});
     }
+
+    protected pauseIdleYellowLight(): void {
+        //this._lightAnimation.kill();
+        this._lightAnimation.pause();
+    }
+
+    protected idleYellowLight(): void {
+
+        if(this._lightAnimation) {
+            this._lightAnimation.resume();
+            return;
+        }
+
+        this._lightAnimation = gsap.to(this._yellowLightOn, {
+            duration: 1, // Animation duration (adjust as needed)
+            alpha: 1, // Target alpha (1 for fully visible)
+            repeat: -1, // Infinite repeat
+            yoyo: true, // Alternates between fade in and fade out
+        });
+
+        //if I would like to stop the animation and start it again
+        //this._lightAnimation.pause();
+        //this._lightAnimation.resume();
+   }
 
     public restart(): void {
         //TODO

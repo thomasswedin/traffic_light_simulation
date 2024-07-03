@@ -36,6 +36,12 @@ export class TrafficLightController {
         return this._view;
     }
 
+    public update(framesPassed?: number): void {
+        if(this._stateMachine.state === TrafficLightState.Idle){
+            //this._view.idle();
+        }
+    }
+
     protected addEventlisteners(): void {
         //this._eventDispatcher.addEventListener(ButtonEvent.RESTART, this.restart, this);
         //this._eventDispatcher.addEventListener(LevelEvent.LEVEL_UP, this.levelUp, this);
@@ -80,7 +86,7 @@ export class TrafficLightController {
                 if (this._stateMachine.state === TrafficLightState.Red) {
                     this.change();
                     gsap.delayedCall(2, this.change.bind(this));
-                } else if (this._stateMachine.state === TrafficLightState.Yellow) {
+                } else if (this._stateMachine.state === TrafficLightState.Yellow || this._stateMachine.state === TrafficLightState.Idle) {
                     this._stateMachine.goToGreenFromYellowBlinkState();
                     this.change();
                 }
@@ -89,16 +95,13 @@ export class TrafficLightController {
                 if (this._stateMachine.state === TrafficLightState.Green) {
                     this.change();
                     gsap.delayedCall(2, this.change.bind(this));
-                } else if (this._stateMachine.state === TrafficLightState.Yellow) {
+                } else if (this._stateMachine.state === TrafficLightState.Yellow || this._stateMachine.state === TrafficLightState.Idle) {
                     this._stateMachine.goToRedFromYellowBlinkState();
                     this.change();
                 }
                 break;
             case ButtonEvent.YELLOW_BLINK_STATE:
-                if (this._stateMachine.state === TrafficLightState.Yellow) {
-                    return;
-                }
-                this.change();
+                this.changeToIdleState();
                 break;
             default:
         }
@@ -106,6 +109,11 @@ export class TrafficLightController {
 
     protected change(): void {
         this._stateMachine.change();
+        this._view.switch(this._stateMachine.state, this._stateMachine.previousState);
+    }
+
+    protected changeToIdleState(): void {
+        this._stateMachine.goIdleState();
         this._view.switch(this._stateMachine.state, this._stateMachine.previousState);
     }
 

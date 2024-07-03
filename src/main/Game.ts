@@ -23,7 +23,9 @@ export class Game extends Container implements IScene {
     }
 
     public update(framesPassed: number): void {
-
+        if(this._trafficLightController){
+            this._trafficLightController.update(framesPassed)
+        }
     }
 
     public resize(width: number, height: number): void {
