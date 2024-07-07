@@ -5,18 +5,20 @@ import {gsap} from "gsap";
 import {TYPES} from "../../Types";
 import {TrafficLightModel} from "../model/TrafficLightModel";
 import {TrafficLightView} from "../view/TrafficLightView";
+import {ITrafficLightController} from "./ITrafficLightController.ts";
 import {TrafficLightState} from "./TrafficLightState.ts";
 import {TrafficLightStateMachine} from "./TrafficLightStateMachine";
 
 import {Assets, Container, Graphics} from 'pixi.js';
 import {ButtonEvent} from "../../event/ButtonEvent";
 import {Button} from "../view/Button";
+import {ITrafficLightView} from "../view/ITrafficLightView";
 
 
 @injectable()
-export class TrafficLightController {
+export class TrafficLightController implements ITrafficLightController{
     @inject(TYPES.EventDispatcher) private _eventDispatcher: IEventDispatcher;
-    protected _view: TrafficLightView;
+    protected _view: ITrafficLightView;
     protected _model: TrafficLightModel;
     protected _stateMachine: TrafficLightStateMachine;
     protected _background: Graphics;
@@ -33,7 +35,7 @@ export class TrafficLightController {
         this.addStateButton();
     }
 
-    get view():TrafficLightView {
+    get view():ITrafficLightView {
         return this._view;
     }
 

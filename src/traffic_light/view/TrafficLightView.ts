@@ -7,9 +7,10 @@ import type {IEventDispatcher} from "../../common/event/IEventDispatcher";
 import {gsap} from "gsap";
 //import {PixiPlugin} from "gsap/PixiPlugin";
 import {TrafficLightState} from "../controller/TrafficLightState";
+import {ITrafficLightView} from "./ITrafficLightView.ts";
 
 @injectable()
-export class TrafficLightView  {
+export class TrafficLightView  implements ITrafficLightView{
     @inject(TYPES.EventDispatcher) private _eventDispatcher: IEventDispatcher;
 
     protected _view: Container;

@@ -7,5 +7,5 @@ export interface ITrafficLightView {
 
     switch(state: TrafficLightState, previousState: TrafficLightState): void;
 
-    view(): Container;
+    get view(): Container;
 }

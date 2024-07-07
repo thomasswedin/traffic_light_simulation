@@ -1,9 +1,10 @@
+import {Container as System} from "inversify/lib/container/container";
 import {ITrafficLightView} from "../view/ITrafficLightView.ts";
 
 export interface ITrafficLightController {
-    setup(): void;
+    setup(system: System): void;
 
-    view(): ITrafficLightView;
+    get view(): ITrafficLightView;
 
     update(framesPassed: number): void;
 }
