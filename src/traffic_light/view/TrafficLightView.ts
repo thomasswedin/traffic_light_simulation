@@ -9,10 +9,11 @@ import {gsap} from "gsap";
 import {TrafficLightState} from "../controller/TrafficLightState";
 
 @injectable()
-export class TrafficLightView {
+export class TrafficLightView  {
     @inject(TYPES.EventDispatcher) private _eventDispatcher: IEventDispatcher;
 
     protected _view: Container;
+    protected _trafficLightView: Container;
     private _trafficLight: Sprite;
 
     private _redLightOff: Sprite;
@@ -32,6 +33,10 @@ export class TrafficLightView {
     public setup(): void {
         this._view = new Container();
         this._view.position.set(0, 0);
+
+        this._trafficLightView = new Container();
+        this._trafficLightView.position.set(0, 0);
+
         this.createBackground();
         this.turnOffAllLights();
     }
@@ -102,15 +107,18 @@ export class TrafficLightView {
         this._yellowLightOn.position.set(this._yellowLightPos.x, this._yellowLightPos.y);
         this._greenLightOn.position.set(this._greenLightPos.x, this._greenLightPos.y);
 
-        this._view.addChild(this._trafficLight);
+        this._trafficLightView.addChild(this._trafficLight);
 
-        this._view.addChild(this._redLightOff);
-        this._view.addChild(this._yellowLightOff);
-        this._view.addChild(this._greenLightOff);
+        this._trafficLightView.addChild(this._redLightOff);
+        this._trafficLightView.addChild(this._yellowLightOff);
+        this._trafficLightView.addChild(this._greenLightOff);
 
-        this._view.addChild(this._redLightOn);
-        this._view.addChild(this._yellowLightOn);
-        this._view.addChild(this._greenLightOn);
+        this._trafficLightView.addChild(this._redLightOn);
+        this._trafficLightView.addChild(this._yellowLightOn);
+        this._trafficLightView.addChild(this._greenLightOn);
+        this._trafficLightView.scale.set(0.5);
+        this._trafficLightView.position.set(160, 0);
+        this._view.addChild(this._trafficLightView);
     }
 
     protected turnLight(light: Sprite, status: boolean): void {

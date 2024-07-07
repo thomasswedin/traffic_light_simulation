@@ -10,12 +10,24 @@ import { EventDispatcher } from "../common/event/EventDispatcher";
 import { IScene } from "../common/IScene";
 import { Manager } from "./Manager";
 import { Helper } from "../common/utils/Helper";
-//import { GameConstants } from "../constants/GameConstants";
+
+import { AppConstants } from "../constants/AppConstants.ts";
 
 export class Game extends Container implements IScene {
 
-    protected _trafficLightController: TrafficLightController;
-    protected _trafficLightView: TrafficLightView;
+    protected _trafficLightControllerOne: TrafficLightController;
+    protected _trafficLightViewOne:TrafficLightView;
+
+    protected _trafficLightControllerTwo: TrafficLightController;
+    protected _trafficLightViewTwo:TrafficLightView;
+
+    protected _trafficLightControllerThree: TrafficLightController;
+    protected _trafficLightViewThree:TrafficLightView;
+
+    protected _trafficLightControllerFour: TrafficLightController;
+    protected _trafficLightViewFour: TrafficLightView;
+
+    protected _system: System;
 
     constructor() {
         super();
@@ -23,8 +35,12 @@ export class Game extends Container implements IScene {
     }
 
     public update(framesPassed: number): void {
-        if(this._trafficLightController){
-            this._trafficLightController.update(framesPassed)
+        if(this._trafficLightControllerThree){
+            this._trafficLightControllerThree.update(framesPassed)
+        }
+
+        if(this._trafficLightControllerTwo){
+            this._trafficLightControllerTwo.update(framesPassed)
         }
     }
 
@@ -41,22 +57,65 @@ export class Game extends Container implements IScene {
     
 
     protected init() {
-        const system = new System();
-        system.bind<IEventDispatcher>(TYPES.EventDispatcher).toConstantValue(EventDispatcher.getInstance());
-        this._trafficLightController = system.resolve<TrafficLightController>(TrafficLightController);
-        this._trafficLightController.setup(system);
-        this._trafficLightView = this._trafficLightController.view;
+         this._system = new System();
+        this._system.bind<IEventDispatcher>(TYPES.EventDispatcher).toConstantValue(EventDispatcher.getInstance());
+
+
+        this._trafficLightControllerOne = this._system.resolve<TrafficLightController>(TrafficLightController);
+        this._trafficLightControllerOne.setup(this._system);
+        this._trafficLightViewOne = this._trafficLightControllerOne.view;
+
+        this._trafficLightControllerTwo = this._system.resolve<TrafficLightController>(TrafficLightController);
+        this._trafficLightControllerTwo.setup(this._system);
+        this._trafficLightViewTwo = this._trafficLightControllerTwo.view;
+
+        this._trafficLightControllerThree = this._system.resolve<TrafficLightController>(TrafficLightController);
+        this._trafficLightControllerThree.setup(this._system);
+        this._trafficLightViewThree = this._trafficLightControllerThree.view;
+
+        this._trafficLightControllerFour = this._system.resolve<TrafficLightController>(TrafficLightController);
+        this._trafficLightControllerFour.setup(this._system);
+        this._trafficLightViewFour = this._trafficLightControllerFour.view;
+
+
+        //this._trafficLightControllerOne = this._system.resolve<TrafficLightController>(TrafficLightController);
+        //this._trafficLightControllerTwo = this._system.resolve<TrafficLightController>(TrafficLightController);
+        //this._trafficLightControllerThree = this._system.resolve<TrafficLightController>(TrafficLightController);
+        //this._trafficLightControllerFour = this._system.resolve<TrafficLightController>(TrafficLightController);
+
+        //this.setupNewTrafficLight(this._trafficLightControllerOne, this._trafficLightViewOne, AppConstants.TRAFFIC_LIGHT_1);
+        //this.setupNewTrafficLight(this._trafficLightControllerTwo, this._trafficLightViewTwo, AppConstants.TRAFFIC_LIGHT_2);
+        //this.setupNewTrafficLight(this._trafficLightControllerThree, this._trafficLightViewThree, AppConstants.TRAFFIC_LIGHT_3);
+        //this.setupNewTrafficLight(this._trafficLightControllerFour, this._trafficLightViewFour, AppConstants.TRAFFIC_LIGHT_4);
+
 
         //Change the size of the traffic light view
-        this._trafficLightView.view.scale.set(0.02);
-        this._trafficLightView.view.position.set(0, 10);
-        this.addChild(this._trafficLightView.view);
+        this._trafficLightViewOne.view.scale.set(0.06);
+        this._trafficLightViewOne.view.position.set(30, 10);
+        this.addChild(this._trafficLightViewOne.view);
+
+        this._trafficLightViewTwo.view.scale.set(0.06);
+        this._trafficLightViewTwo.view.position.set(-10, 34);
+        this.addChild(this._trafficLightViewTwo.view);
+
+        this._trafficLightViewThree.view.scale.set(0.06);
+        this._trafficLightViewThree.view.position.set(70, 34);
+        this.addChild(this._trafficLightViewThree.view);
+
+        this._trafficLightViewFour.view.scale.set(0.06);
+        this._trafficLightViewFour.view.position.set(30, 60);
+        this.addChild(this._trafficLightViewFour.view);
 
         window.addEventListener("orientationchange", this.orientationChange.bind(this));
         this.setupBackground(1);
-        
+
         this.orientationChange();
         this.reScale(Manager.width, Manager.height);
+    }
+
+    private setupNewTrafficLight(controller:TrafficLightController, view:TrafficLightView, id:string): void {
+        controller.setup(this._system);
+        view = controller.view;
     }
 
     private orientationChange(): void {

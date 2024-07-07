@@ -12,6 +12,7 @@ import {Assets, Container, Graphics} from 'pixi.js';
 import {ButtonEvent} from "../../event/ButtonEvent";
 import {Button} from "../view/Button";
 
+
 @injectable()
 export class TrafficLightController {
     @inject(TYPES.EventDispatcher) private _eventDispatcher: IEventDispatcher;
@@ -32,7 +33,7 @@ export class TrafficLightController {
         this.addStateButton();
     }
 
-    get view(): TrafficLightView {
+    get view():TrafficLightView {
         return this._view;
     }
 
