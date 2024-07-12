@@ -45,13 +45,13 @@ export class TrafficLightView  implements ITrafficLightView{
     public switch(state: TrafficLightState, previousState: TrafficLightState): void {
         switch (previousState) {
             case TrafficLightState.Red:
-                this.turnLight(this._redLightOn, false);
+                this.turnLight(this._redLightOn, false, 2);
                 break;
             case TrafficLightState.Yellow:
                 this.turnLight(this._yellowLightOn, false);
                 break;
             case TrafficLightState.Green:
-                this.turnLight(this._greenLightOn, false);
+                this.turnLight(this._greenLightOn, false, 2);
                 break;
             case TrafficLightState.Idle:
                 //this.killIdleYellowLight();
@@ -122,8 +122,14 @@ export class TrafficLightView  implements ITrafficLightView{
         this._view.addChild(this._trafficLightView);
     }
 
-    protected turnLight(light: Sprite, status: boolean): void {
-        gsap.to(light, {duration: AppConstants.SWITCH_DURATION, alpha: status ? 1 : 0});
+    protected turnLight(light: Sprite, status: boolean, delay?:number): void {
+        let d:number;
+        if(delay == undefined) {
+            gsap.to(light, {duration: AppConstants.SWITCH_DURATION, alpha: status ? 1 : 0});
+        } else {
+            gsap.to(light, {duration: AppConstants.SWITCH_DURATION, alpha: status ? 1 : 0, delay: delay});
+        }
+
     }
 
     protected pauseIdleYellowLight(): void {
