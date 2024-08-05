@@ -51,7 +51,7 @@ export class TrafficLightView  implements ITrafficLightView{
                 this.turnLight(this._yellowLightOn, false);
                 break;
             case TrafficLightState.Green:
-                this.turnLight(this._greenLightOn, false, 2);
+                this.turnLight(this._greenLightOn, false, 0);
                 break;
             case TrafficLightState.Idle:
                 //this.killIdleYellowLight();

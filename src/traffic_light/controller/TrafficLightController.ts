@@ -13,20 +13,22 @@ import {Assets, Container, Graphics} from 'pixi.js';
 import {ButtonEvent} from "../../event/ButtonEvent";
 import {Button} from "../view/Button";
 import {ITrafficLightView} from "../view/ITrafficLightView";
-
+import {TrafficLightEvent} from "../../event/TrafficLightEvent";
 
 @injectable()
-export class TrafficLightController implements ITrafficLightController{
+export class TrafficLightController implements ITrafficLightController {
     @inject(TYPES.EventDispatcher) private _eventDispatcher: IEventDispatcher;
     protected _view: ITrafficLightView;
     protected _model: TrafficLightModel;
     protected _stateMachine: TrafficLightStateMachine;
     protected _background: Graphics;
+    protected _id: string;
 
-    public setup(system: System): void {
+    public setup(system: System, id: string): void {
         this._model = system.resolve<TrafficLightModel>(TrafficLightModel);
         this._view = system.resolve<TrafficLightView>(TrafficLightView);
         this._stateMachine = system.resolve<TrafficLightStateMachine>(TrafficLightStateMachine);
+        this._id = id;
         this._view.setup();
         this._stateMachine.change();
         this._view.switch(this._stateMachine.state, this._stateMachine.previousState);
@@ -35,24 +37,27 @@ export class TrafficLightController implements ITrafficLightController{
         this.addStateButton();
     }
 
-    get view():ITrafficLightView {
+    get view(): ITrafficLightView {
         return this._view;
     }
 
     public update(framesPassed?: number): void {
-        if(this._stateMachine.state === TrafficLightState.Idle){
+        if (this._stateMachine.state === TrafficLightState.Idle) {
             //this._view.idle();
         }
     }
 
     protected addEventlisteners(): void {
-        //this._eventDispatcher.addEventListener(ButtonEvent.RESTART, this.restart, this);
-        //this._eventDispatcher.addEventListener(LevelEvent.LEVEL_UP, this.levelUp, this);
+        this._eventDispatcher.addEventListener(TrafficLightEvent.ACTION, this.action, this);
     }
 
-    protected restart(): void {
+    protected action(event: TrafficLightEvent): void {
         //this._view.restart();
-        console.log("LevelViewController : restart");
+        console.log("TrafficLightController : action");
+
+        if(event.data && event.data.id === this._id){
+            this.stateAction(event.data.state);
+        }
     }
 
     protected addStateButton(): void {
@@ -76,8 +81,11 @@ export class TrafficLightController implements ITrafficLightController{
         button.view.position.set(425, yPos);
         this._view.view.addChild(button.view);
     }
-
     protected buttonClicked = (id: string) => {
+        this.stateAction(id);
+    }
+
+    protected stateAction (id: string)  {
         console.log("Received ID: " + JSON.stringify(id));
 
         switch (id) {
@@ -86,6 +94,7 @@ export class TrafficLightController implements ITrafficLightController{
                 //this._eventDispatcher.dispatchEvent(new ButtonEvent(ButtonEvent.PAUSE));
                 break;
             case ButtonEvent.GO_STATE:
+            case TrafficLightState.Green:
                 if (this._stateMachine.state === TrafficLightState.Red) {
                     this.change();
                     gsap.delayedCall(2, this.change.bind(this));
@@ -95,6 +104,7 @@ export class TrafficLightController implements ITrafficLightController{
                 }
                 break;
             case ButtonEvent.STOP_STATE:
+            case TrafficLightState.Red:
                 if (this._stateMachine.state === TrafficLightState.Green) {
                     this.change();
                     gsap.delayedCall(2, this.change.bind(this));
@@ -104,6 +114,7 @@ export class TrafficLightController implements ITrafficLightController{
                 }
                 break;
             case ButtonEvent.YELLOW_BLINK_STATE:
+            case TrafficLightState.Idle:
                 this.changeToIdleState();
                 break;
             default:

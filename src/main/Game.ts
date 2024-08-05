@@ -7,6 +7,7 @@ import {ITrafficLightView} from "../traffic_light/view/ITrafficLightView.ts";
 import { TYPES } from "../Types";
 import type {IEventDispatcher } from "../common/event/IEventDispatcher";
 import { EventDispatcher } from "../common/event/EventDispatcher";
+import { TrafficLightManager } from "../traffic_light_manager/TrafficLightManager.ts";
 
 import { IScene } from "../common/IScene";
 import { Manager } from "./Manager";
@@ -29,6 +30,7 @@ export class Game extends Container implements IScene {
     protected _trafficLightViewFour: ITrafficLightView;
 
     protected _system: System;
+    protected _trafficLightManager: TrafficLightManager;
 
     constructor() {
         super();
@@ -58,7 +60,7 @@ export class Game extends Container implements IScene {
     
 
     protected init() {
-         this._system = new System();
+        this._system = new System();
         this._system.bind<IEventDispatcher>(TYPES.EventDispatcher).toConstantValue(EventDispatcher.getInstance());
 
         this._trafficLightControllerOne = this._system.resolve<TrafficLightController>(TrafficLightController);
@@ -76,10 +78,12 @@ export class Game extends Container implements IScene {
 
         this.orientationChange();
         this.reScale(Manager.width, Manager.height);
+        this._trafficLightManager = this._system.resolve<TrafficLightManager>(TrafficLightManager);
+        this._trafficLightManager.init();
     }
 
     private setupNewTrafficLight(controller:ITrafficLightController, view:ITrafficLightView, id:string): void {
-        controller.setup(this._system);
+        controller.setup(this._system, id);
         view = controller.view;
         view.view.scale.set(0.06);
         let pos = this.getPos(id);
@@ -127,16 +131,17 @@ export class Game extends Container implements IScene {
 
     private positionElementsForLandscapeMode(): void {
         console.log("LANDSCAPE_MODE");
-
         const xPos: number = 0;
         const yPos: number = 0;
+        //this.position.set(xPos, 50);
     }
 
     private positionElementsForPortraiteMode(): void {
         console.log("PORTRAITE_MODE");
 
-        const xPos: number = 30;
+        const xPos: number = 130;
         const yPos: number = 30;
+        //this.position.set(xPos, 50);
     }
 
     private reScale(width: number, height: number): void {
